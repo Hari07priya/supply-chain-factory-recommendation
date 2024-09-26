@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Factory Recommendation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #2e004f, #73255c, #b96aad, #e084d4);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff; /* White text color for contrast */
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .container {
+            background: linear-gradient(135deg, #2e004f, #73255c, #b96aad, #e084d4);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            padding: 20px 40px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7); /* Darker shadow */
+            border-radius: 8px;
+            max-width: 500px;
+            width: 100%;
+            color: #fff; /* White text color for container */
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 10px;
+            margin-bottom: 5px;
+            color: #ddd; /* Light grey for labels */
+        }
+        input[type="text"],
+        input[type="number"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            color: #000; /* Black text for input fields */
+        }
+        button {
+            background-color: #800080; /* Dark purple for button */
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #5a005a; /* Even darker purple on hover */
+        }
+        .result {
+            margin-top: 20px;
+        }
+        .result h2 {
+            color: #fff;
+        }
+        .result p {
+            color: #ddd; /* Light grey for result text */
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Factory Recommendation System</h1>
+        <form action="/recommend" method="post">
+            <label for="country">Country:</label>
+            <input type="text" id="country" name="country" required>
+            
+            <label for="rating">Supplier Rating (1-5):</label>
+            <input type="number" id="rating" name="rating" min="1" max="5" required>
+            
+            <label for="delivery">Delivery Performance (1-5):</label>
+            <input type="number" id="delivery" name="delivery" min="1" max="5" required>
+            
+            <label for="communication">Communication (1-5):</label>
+            <input type="number" id="communication" name="communication" min="1" max="5" required>
+            
+            <label for="price">Price Competitiveness (1-5):</label>
+            <input type="number" id="price" name="price" min="1" max="5" required>
+            
+            <button type="submit">Get Recommendation</button>
+        </form>
+
+        {% if supplier_id %}
+            <div class="result">
+                <h2>Recommendation</h2>
+                <p>Supplier ID: {{ supplier_id }}</p>
+                <p>Factory Name: {{ factory_name }}</p>
+                <p>Reason: {{ reason }}</p>
+            </div>
+        {% elif error %}
+            <div class="error">
+                <h2>Error</h2>
+                <p>{{ error }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
